@@ -16,7 +16,6 @@ namespace TestRainbow.Controllers
             {
                 return BadRequest(disco.Error);
             }
-
             // request token
             var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
@@ -27,12 +26,7 @@ namespace TestRainbow.Controllers
                 Scope = "scope1"
             });
 
-            if (tokenResponse.IsError)
-            {
-                return BadRequest(tokenResponse.Error);
-            }
-
-            return new ObjectResult(tokenResponse.AccessToken);
+            return tokenResponse.IsError ? BadRequest(tokenResponse.Error) : new ObjectResult(tokenResponse.AccessToken);
         }
     }
 }

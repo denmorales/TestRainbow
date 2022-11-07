@@ -23,7 +23,6 @@ namespace TestRainbow.Controllers
         public async Task<FileResult> Document(long id)
         {
             var result = await _provider.GetDocument(id);
-
             if (result == null) return new FileContentResult(null, "text/csv");
             var bytes = await ConvertToByteArray(result);
             return File(bytes, "text/csv", "document" );
@@ -34,7 +33,6 @@ namespace TestRainbow.Controllers
         public async Task<FileResult> Boxes(string id)
         {
             var list = await _provider.GetRouteBoxes(id);
-
             if (list == null) return new FileContentResult(null, "text/csv");
             var bytes = await ConvertToByteArray(list);
             return File(bytes, "text/csv", "boxes");
