@@ -32,9 +32,9 @@ namespace TestRainbow.Controllers
         [Route("boxes/{id}")]
         public async Task<FileResult> Boxes(string id)
         {
-            var list = await _provider.GetRouteBoxes(id);
-            if (list == null) return new FileContentResult(null, "text/csv");
-            var bytes = await ConvertToByteArray(list);
+            var result = await _provider.GetRouteBoxes(id);
+            if (result == null) return new FileContentResult(null, "text/csv");
+            var bytes = await ConvertToByteArray(result);
             return File(bytes, "text/csv", "boxes");
         }
 
